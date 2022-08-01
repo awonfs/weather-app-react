@@ -5,6 +5,11 @@ const App = () => {
   const apiKey = "fe3be0578fd5cacc812f7677a03cd5be";
   const [weatherData, setWeatherData] = useState([{}]);
   const [city, setCity] = useState("");
+  const [show, setShow] = useState(true);
+
+  const toggleSearch = (text) => {
+    setShow(!show);
+  };
 
   const getWeather = (event) => {
     if (event.key === "Enter") {
@@ -21,13 +26,19 @@ const App = () => {
 
   return (
     <div className="container">
-      <input
-        className="input"
-        placeholder="Enter a city"
-        onChange={(e) => setCity(e.target.value)}
-        value={city}
-        onKeyPress={getWeather}
-      />
+      {show === true && (
+        <input
+          className="input"
+          placeholder="Enter a city"
+          onChange={(e) => setCity(e.target.value)}
+          value={city}
+          onKeyPress={getWeather}
+        />
+      )}
+
+      <button className="btn" onClick={toggleSearch}>
+        Toggle Search Bar
+      </button>
 
       {typeof weatherData.main === "undefined" ? (
         <div>
@@ -41,7 +52,11 @@ const App = () => {
         </div>
       )}
 
-      {weatherData.cod === "404" ? <p className="error-msg">City not found.</p> : <></>}
+      {weatherData.cod === "404" ? (
+        <p className="error-msg">City not found.</p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
