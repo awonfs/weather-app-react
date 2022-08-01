@@ -7,7 +7,7 @@ const App = () => {
   const [city, setCity] = useState("");
   const [show, setShow] = useState(true);
 
-  const toggleSearch = (text) => {
+  const toggleSearch = () => {
     setShow(!show);
   };
 
